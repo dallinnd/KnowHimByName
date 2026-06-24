@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scripture Study Companion</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-home font-sans antialiased">
+
+    <header class="app-header">
+        <button id="back-btn" class="hidden nav-action-btn">
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"></polyline></svg>
+            Back
+        </button>
+        <h1 id="app-title">Scripture Study</h1>
+        <button id="bookmarks-nav-btn" class="nav-action-btn">
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
+        </button>
+    </header>
+
+    <main class="app-main">
+        
+        <section id="home-view" class="app-view active">
+            <div id="tiles-grid" class="grid-2-wide">
+                </div>
+        </section>
+
+        <section id="modules-view" class="app-view">
+            <div id="section-banner" class="banner-graphic">
+                <h2 id="section-banner-title"></h2>
+            </div>
+            <div id="modules-list-container" class="modules-stack">
+                </div>
+        </section>
+
+        <section id="bookmarks-view" class="app-view">
+            <h2 class="view-header">Saved Scripture Bookmarks</h2>
+            <div id="bookmarks-list-container" class="modules-stack">
+                </div>
+        </section>
+
+    </main>
+
+    <div id="modal-overlay" class="modal-backdrop hidden">
+        <div class="modal-content">
+            <header class="modal-header">
+                <h3 class="modal-ref">Chapter Ref</h3>
+                <button class="main-close">&times;</button>
+            </header>
+            
+            <div id="modal-text" class="chapter-scroll-zone"></div>
+            
+            <footer class="modal-footer"></footer>
+
+            <button id="prev-chapter-btn" class="chapter-nav-arrow left-arrow">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="15 18 9 12 15 6"></polyline></svg>
+            </button>
+            <button id="next-chapter-btn" class="chapter-nav-arrow right-arrow">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </button>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
