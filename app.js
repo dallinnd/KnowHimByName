@@ -1,11 +1,35 @@
-// --- Application Global Configurations ---
-const BOOKS_CONFIG = [
-    { id: 'ot', name: 'Old Testament', tileClass: 'tile-ot', bgClass: 'bg-ot' },
-    { id: 'nt', name: 'New Testament', tileClass: 'tile-nt', bgClass: 'bg-nt' },
-    { id: 'bom', name: 'Book of Mormon', tileClass: 'tile-bom', bgClass: 'bg-bom' },
-    { id: 'dc', name: 'D&C', tileClass: 'tile-dc', bgClass: 'bg-dc' },
-    { id: 'pgp', name: 'Pearl of GP', tileClass: 'tile-pgp', bgClass: 'bg-pgp' }
+// --- 50 Names of Christ Loop Matrix ---
+const CHRIST_NAMES_DATA = [
+    "Savior", "Redeemer", "Bread of Life", "Lord", "Creator", 
+    "Son of the Living God", "Only Begotten Son", "Beloved Son", "Holy One of Israel", "Wonderful", 
+    "Counsellor", "Mighty God", "Everlasting Father", "Prince of Peace", "King of Kings", 
+    "Advocate", "Almighty", "Alpha and Omega", "Amen", "Anointed", 
+    "Apostle", "Author of Salvation", "Bishop of Souls", "Branch", "Captain of Salvation", 
+    "Chief Shepherd", "Chief Cornerstone", "Emmanuel", "Deliverer", "Door", 
+    "Good Shepherd", "High Priest", "I AM", "Light of the World", "Messiah", 
+    "The Word", "True Vine", "Rock", "Refuge", "Comforter", 
+    "Dayspring", "King Eternal", "Lamb of God", "Last Adam", "Lord of All", 
+    "Man of Sorrows", "Mediator", "Resurrection and Life", "Root of David", "Way, Truth, and Life"
 ];
+
+const BASE_SEQUENCE_STYLES = [
+    { id: 'ot', colorClass: 'tile-ot', bgClass: 'bg-ot' },
+    { id: 'nt', colorClass: 'tile-nt', bgClass: 'bg-nt' },
+    { id: 'bom', colorClass: 'tile-bom', bgClass: 'bg-bom' },
+    { id: 'dc', colorClass: 'tile-dc', bgClass: 'bg-dc' },
+    { id: 'pgp', colorClass: 'tile-pgp', bgClass: 'bg-pgp' }
+];
+
+const BRAND_TILES_CONFIG = CHRIST_NAMES_DATA.map((name, idx) => {
+    const layout = BASE_SEQUENCE_STYLES[idx % BASE_SEQUENCE_STYLES.length];
+    return {
+        id: `name_${idx + 1}`,
+        name: name,
+        sectionMapId: layout.id,
+        tileClass: layout.colorClass,
+        bgClass: layout.bgClass
+    };
+});
 
 const BOOKS_MAPPING = {
     'ot': ["Genesis", "Exodus", "Leviticus", "Numbers", "Deuteronomy", "Joshua", "Judges", "Ruth", "1 Samuel", "2 Samuel", "1 Kings", "2 Kings", "1 Chronicles", "2 Chronicles", "Ezra", "Nehemiah", "Esther", "Job", "Psalms", "Proverbs", "Ecclesiastes", "Song of Solomon", "Isaiah", "Jeremiah", "Lamentations", "Ezekiel", "Daniel", "Hosea", "Joel", "Amos", "Obadiah", "Jonah", "Micah", "Nahum", "Habakkuk", "Zephaniah", "Haggai", "Zechariah", "Malachi"],
@@ -15,17 +39,14 @@ const BOOKS_MAPPING = {
     'pgp': ["Moses", "Abraham", "Joseph Smith—Matthew", "Joseph Smith—History", "Articles of Faith"]
 };
 
-// Global Memory State Engine
+// Global App State
 let allVerses = [];
 let chapterList = [];
 let modulesData = {};
 let savedBookmarks = JSON.parse(localStorage.getItem('saved_scripture_bookmarks') || '[]');
-
 let currentChapterIndex = -1;
-let currentActiveView = 'home-view';
 let viewHistory = ['home-view'];
 
-// DOM Selectors cached references
 const elements = {
     backBtn: document.getElementById('back-btn'),
     bookmarksNavBtn: document.getElementById('bookmarks-nav-btn'),
@@ -46,22 +67,19 @@ const elements = {
     nextChapterBtn: document.getElementById('next-chapter-btn')
 };
 
-// --- 1. CORE PARSING ENGINE ---
+// --- CORE ASSET PARSING AND LOADING ---
 async function loadApplicationData() {
     try {
-        // Step A: Load text database file structure lines
         const textResponse = await fetch('standard_works.txt');
-        const rawText = await textResponse.text();
-        parseScriptureDatabase(rawText);
+        parseScriptureDatabase(await textResponse.text());
 
-        // Step B: Load customized curation metadata file mapping targets
         const jsonResponse = await fetch('modules.json');
         modulesData = await jsonResponse.json();
 
         initializeAppUI();
     } catch (e) {
-        console.error("Critical boot structure asset failed to verify", e);
-        elements.tilesGrid.innerHTML = `<p style='grid-column: span 2; padding:20px; color:red;'>Initialization Error. Ensure text & json files exist.</p>`;
+        console.error("Critical boot validation check skipped.", e);
+        elements.tilesGrid.innerHTML = `<p style='grid-column: span 2; padding:20px; color:red;'>Initialization Error. Ensure standard_works.txt and modules.json exist.</p>`;
     }
 }
 
@@ -78,9 +96,8 @@ function parseScriptureDatabase(fullText) {
         if (match) {
             const reference = match[1].trim(); 
             const text = match[2].trim();
-            
-            // Resolve source mapping group assignment boundaries
             let sourceId = null;
+            
             for (const [key, bookSet] of Object.entries(BOOKS_MAPPING)) {
                 if (bookSet.some(book => reference.startsWith(book + " "))) {
                     sourceId = key;
@@ -91,13 +108,7 @@ function parseScriptureDatabase(fullText) {
             if (sourceId) {
                 const lastColonIndex = reference.lastIndexOf(':');
                 const chapterId = reference.substring(0, lastColonIndex).trim();
-
-                allVerses.push({
-                    ref: reference,
-                    text: text,
-                    chapterId: chapterId,
-                    source: sourceId
-                });
+                allVerses.push({ ref: reference, text: text, chapterId: chapterId, source: sourceId });
                 uniqueChapters.add(chapterId);
             }
         }
@@ -105,43 +116,37 @@ function parseScriptureDatabase(fullText) {
     chapterList = Array.from(uniqueChapters);
 }
 
-// --- 2. ROUTING ENGINE NAVIGATION CONTROLLERS ---
-function navigateToView(viewId, updateBackgroundClass = null) {
+// --- VIEW NAVIGATION SYSTEM ---
+function navigateToView(viewId, bgClass = null) {
     document.querySelectorAll('.app-view').forEach(el => el.classList.remove('active'));
     document.getElementById(viewId).classList.add('active');
-    currentActiveView = viewId;
 
-    // Reset base structural modifiers when reverting back home
     if (viewId === 'home-view') {
         viewHistory = ['home-view'];
         elements.backBtn.classList.add('hidden');
         elements.appTitle.textContent = "Scripture Study";
-        BOOKS_CONFIG.forEach(b => document.body.classList.remove(b.bgClass));
+        BASE_SEQUENCE_STYLES.forEach(b => document.body.classList.remove(b.bgClass));
     } else {
-        if (viewHistory[viewHistory.length - 1] !== viewId) {
-            viewHistory.push(viewId);
-        }
+        if (viewHistory[viewHistory.length - 1] !== viewId) viewHistory.push(viewId);
         elements.backBtn.classList.remove('hidden');
     }
 
-    if (updateBackgroundClass) {
-        BOOKS_CONFIG.forEach(b => document.body.classList.remove(b.bgClass));
-        document.body.classList.add(updateBackgroundClass);
+    if (bgClass) {
+        BASE_SEQUENCE_STYLES.forEach(b => document.body.classList.remove(b.bgClass));
+        document.body.classList.add(bgClass);
     }
 }
 
 elements.backBtn.addEventListener('click', () => {
     if (viewHistory.length > 1) {
         viewHistory.pop();
-        const fallbackTarget = viewHistory[viewHistory.length - 1];
-        
-        // Find corresponding styling elements to preserve alignment context mapping
+        const fallback = viewHistory[viewHistory.length - 1];
         let targetBg = null;
-        if (fallbackTarget === 'modules-view') {
-            const currentActiveSection = BOOKS_CONFIG.find(b => document.body.className.includes(b.bgClass));
-            if (currentActiveSection) targetBg = currentActiveSection.bgClass;
+        if (fallback === 'modules-view') {
+            const activeSec = BRAND_TILES_CONFIG.find(b => document.body.className.includes(b.bgClass));
+            if (activeSec) targetBg = activeSec.bgClass;
         }
-        navigateToView(fallbackTarget, targetBg);
+        navigateToView(fallback, targetBg);
     }
 });
 
@@ -151,23 +156,23 @@ elements.bookmarksNavBtn.addEventListener('click', () => {
     elements.appTitle.textContent = "Bookmarks";
 });
 
-// --- 3. RENDERING LAYOUT ENGINE BUILDERS ---
+// --- RENDER CARD MODULE LIFE CONTROLLERS ---
 function initializeAppUI() {
     elements.tilesGrid.innerHTML = '';
-    BOOKS_CONFIG.forEach(config => {
+    BRAND_TILES_CONFIG.forEach(config => {
         const blockTile = document.createElement('button');
         blockTile.className = `color-tile ${config.tileClass}`;
-        blockTile.innerHTML = `<div></div><span>${config.name}</span>`;
+        blockTile.innerHTML = `<span style="font-size:0.65rem; opacity:0.6;">Title ${config.id.split('_')[1]}</span><span>${config.name}</span>`;
         blockTile.onclick = () => launchSectionView(config);
         elements.tilesGrid.appendChild(blockTile);
     });
 }
 
-function launchSectionView(sectionConfig) {
-    elements.appTitle.textContent = sectionConfig.name;
-    elements.bannerTitle.textContent = sectionConfig.name;
-    renderSectionModulesList(sectionConfig.id);
-    navigateToView('modules-view', sectionConfig.bgClass);
+function launchSectionView(config) {
+    elements.appTitle.textContent = config.name;
+    elements.bannerTitle.textContent = config.name;
+    renderSectionModulesList(config.sectionMapId);
+    navigateToView('modules-view', config.bgClass);
 }
 
 function renderSectionModulesList(sectionId) {
@@ -175,14 +180,13 @@ function renderSectionModulesList(sectionId) {
     const items = modulesData[sectionId] || [];
 
     if (items.length === 0) {
-        elements.modulesContainer.innerHTML = `<div class="glass-module-card text-center">No curated modules assigned to this section.</div>`;
+        elements.modulesContainer.innerHTML = `<div class="glass-module-card text-center">No modules compiled for this section profile.</div>`;
         return;
     }
 
     items.forEach(mod => {
         const card = document.createElement('div');
         card.className = "glass-module-card";
-        
         const snippetText = extractVerseStringFromRange(mod.reference);
         const isBookmarked = savedBookmarks.includes(mod.reference);
 
@@ -195,7 +199,6 @@ function renderSectionModulesList(sectionId) {
             </button>
         `;
 
-        // Separate container routing from standalone overlay interactions
         card.addEventListener('click', (e) => {
             if (e.target.closest('.tile-bookmark-toggle')) return;
             openChapterReaderModal(mod.reference);
@@ -206,7 +209,6 @@ function renderSectionModulesList(sectionId) {
             toggleBookmarkValue(mod.reference);
             bookmarkToggle.classList.toggle('active');
         };
-
         elements.modulesContainer.appendChild(card);
     });
 }
@@ -226,11 +228,10 @@ function extractVerseStringFromRange(ref) {
 
     return allVerses
         .filter(v => v.chapterId === chapterId && targetVerses.includes(parseInt(v.ref.split(':')[1])))
-        .map(v => v.text)
-        .join(' ');
+        .map(v => v.text).join(' ');
 }
 
-// --- 4. VIEW FULL TEXT INTEGRATION & SCROLL INJECTION ---
+// --- BOTTOM SHEET LAYER TEXT MANAGER ---
 function openChapterReaderModal(fullRef) {
     const lastColonIndex = fullRef.lastIndexOf(':');
     const chapterId = fullRef.substring(0, lastColonIndex).trim();
@@ -258,7 +259,6 @@ function loadChapterTextContent(chapterId, targetHighlightRef = null) {
     }
 
     const matchingVerses = allVerses.filter(v => v.chapterId === chapterId);
-    
     matchingVerses.forEach(v => {
         const verseNum = parseInt(v.ref.split(':')[1]);
         const paragraph = document.createElement('div');
@@ -268,24 +268,18 @@ function loadChapterTextContent(chapterId, targetHighlightRef = null) {
         if (isHighlighted && verseNum === Math.min(...Array.from(highlightSet))) {
             paragraph.id = "reader-scroll-anchor";
         }
-        
         paragraph.innerHTML = `<b>${verseNum}</b>${v.text}`;
         elements.modalText.appendChild(paragraph);
     });
 
-    // Control structural UI visibility bounding values
     elements.prevChapterBtn.classList.toggle('hidden', currentChapterIndex <= 0);
     elements.nextChapterBtn.classList.toggle('hidden', currentChapterIndex >= chapterList.length - 1);
 
-    // Apply accurate centered viewport scrolling updates
     setTimeout(() => {
-        const targetAnchor = document.getElementById('reader-scroll-anchor');
-        if (targetAnchor) {
-            targetAnchor.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        } else {
-            elements.modalText.scrollTop = 0;
-        }
-    }, 180);
+        const anchor = document.getElementById('reader-scroll-anchor');
+        if (anchor) anchor.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        else elements.modalText.scrollTop = 0;
+    }, 200);
 }
 
 function stepChapterChange(direction) {
@@ -293,7 +287,6 @@ function stepChapterChange(direction) {
     if (targetIdx >= 0 && targetIdx < chapterList.length) {
         currentChapterIndex = targetIdx;
         elements.modalText.style.opacity = '0';
-        
         setTimeout(() => {
             loadChapterTextContent(chapterList[currentChapterIndex]);
             elements.modalText.style.opacity = '1';
@@ -301,15 +294,12 @@ function stepChapterChange(direction) {
     }
 }
 
-// Fixed Step Navigation Controllers
 elements.prevChapterBtn.onclick = () => stepChapterChange(-1);
 elements.nextChapterBtn.onclick = () => stepChapterChange(1);
 elements.closeModalBtn.onclick = () => elements.modalOverlay.classList.add('hidden');
 
-// --- 5. NATIVE GESTURE TOUCH SWIPES ---
-let touchXStart = 0;
-let touchYStart = 0;
-
+// --- SWIPE GESTURE LAYER ---
+let touchXStart = 0, touchYStart = 0;
 elements.modalText.addEventListener('touchstart', (e) => {
     touchXStart = e.changedTouches[0].screenX;
     touchYStart = e.changedTouches[0].screenY;
@@ -318,15 +308,12 @@ elements.modalText.addEventListener('touchstart', (e) => {
 elements.modalText.addEventListener('touchend', (e) => {
     const deltaX = touchXStart - e.changedTouches[0].screenX;
     const deltaY = touchYStart - e.changedTouches[0].screenY;
-
-    // Check if vertical scrolling motion dominates horizontal swipe intent
     if (Math.abs(deltaY) > Math.abs(deltaX) * 1.4) return;
-
-    if (deltaX > 45) stepChapterChange(1);  // Swiped Left -> Load Next
-    else if (deltaX < -45) stepChapterChange(-1); // Swiped Right -> Load Prev
+    if (deltaX > 45) stepChapterChange(1);
+    else if (deltaX < -45) stepChapterChange(-1);
 }, { passive: true });
 
-// --- 6. USER LOCAL BOOKMARK PERSISTENCE ---
+// --- LOCAL STORAGE MANAGER ---
 function toggleBookmarkValue(ref) {
     const idx = savedBookmarks.indexOf(ref);
     if (idx > -1) savedBookmarks.splice(idx, 1);
@@ -340,19 +327,13 @@ function renderBookmarksDashboard() {
         elements.bookmarksContainer.innerHTML = `<p style="color:#94a3b8; font-style:italic; text-align:center; padding:20px;">No saved bookmarks yet.</p>`;
         return;
     }
-
     savedBookmarks.forEach(ref => {
         const card = document.createElement('div');
         card.className = "glass-module-card";
-        card.innerHTML = `
-            <div class="module-title">${ref.split(':')[0]}</div>
-            <div class="module-ref">${ref}</div>
-            <div class="module-snippet">"${extractVerseStringFromRange(ref)}"</div>
-        `;
+        card.innerHTML = `<div class="module-title">${ref.split(':')[0]}</div><div class="module-ref">${ref}</div><div class="module-snippet">"${extractVerseStringFromRange(ref)}"</div>`;
         card.onclick = () => openChapterReaderModal(ref);
         elements.bookmarksContainer.appendChild(card);
     });
 }
 
-// Bootstrapping App Loader Lifecycle Ignition Event
 window.addEventListener('DOMContentLoaded', loadApplicationData);
