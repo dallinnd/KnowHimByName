@@ -33,7 +33,48 @@ body.bg-pgp { background-color: var(--green-light); }
 
 /* --- 2-Wide Grid System --- */
 .grid-2-wide { display: grid; grid-template-cols: repeat(2, 1fr); gap: 12px; padding-top: 4px; }
-.color-tile { height: 110px; border-radius: var(--card-radius); border: none; padding: 16px; text-align: left; font-weight: 700; font-size: 0.95rem; line-height: 1.2; color: white; display: flex; flex-direction: column; justify-content: space-between; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.03); transition: var(--transition-smooth); }
+/* --- Updated 2-Column High-Readability Grid Layout --- */
+.grid-2-wide { 
+    display: grid; 
+    grid-template-cols: repeat(2, 1fr); 
+    gap: 16px;          /* Increased padding space between grid columns */
+    padding-top: 8px; 
+}
+
+.color-tile { 
+    height: auto;        /* Swaps fixed heights for content flexibility */
+    min-height: 125px;   /* Sets baseline viewport height */
+    border-radius: var(--card-radius); 
+    border: none; 
+    padding: 20px 16px;  /* Deeper internal layout breathing space */
+    text-align: left; 
+    
+    /* Enhanced Typography Focus */
+    font-weight: 800;    
+    font-size: 1.25rem;  /* Increases display text footprint */
+    line-height: 1.3;    /* Gives multi-line name combinations room to wrap */
+    
+    color: white; 
+    display: flex; 
+    flex-direction: column; 
+    justify-content: space-between; 
+    cursor: pointer; 
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05); 
+    transition: var(--transition-smooth); 
+}
+
+/* Enhances the small title counter text at the top of each tile */
+.color-tile span[style*="font-size:0.65rem"] {
+    font-size: 0.8rem !important;  /* Increases sub-label clarity */
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    opacity: 0.75 !important;
+    margin-bottom: 8px;
+    display: block;
+}
+
+
+
 .color-tile:active { transform: scale(0.96); opacity: 0.9; }
 
 .tile-ot { background-color: var(--navy); }
