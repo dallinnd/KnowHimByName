@@ -2,11 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Scripture Study Companion</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body class="bg-home font-sans antialiased">
+<body class="font-sans antialiased">
 
     <header class="app-header">
         <button id="back-btn" class="hidden nav-action-btn">
@@ -43,7 +43,9 @@
     </main>
 
     <div id="modal-overlay" class="modal-backdrop hidden">
-        <div class="modal-content">
+        <div class="modal-content bottom-sheet">
+            <div class="drag-handle"></div>
+            
             <header class="modal-header">
                 <h3 class="modal-ref">Chapter Ref</h3>
                 <button class="main-close">&times;</button>
@@ -51,14 +53,14 @@
             
             <div id="modal-text" class="chapter-scroll-zone"></div>
             
-            <footer class="modal-footer"></footer>
-
-            <button id="prev-chapter-btn" class="chapter-nav-arrow left-arrow">
-                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="15 18 9 12 15 6"></polyline></svg>
-            </button>
-            <button id="next-chapter-btn" class="chapter-nav-arrow right-arrow">
-                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="9 18 15 12 9 6"></polyline></svg>
-            </button>
+            <footer class="modal-footer">
+                <button id="prev-chapter-btn" class="footer-nav-btn">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"></polyline></svg> Previous Chapter
+                </button>
+                <button id="next-chapter-btn" class="footer-nav-btn">
+                    Next Chapter <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                </button>
+            </footer>
         </div>
     </div>
 
