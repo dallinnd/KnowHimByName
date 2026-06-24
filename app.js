@@ -162,7 +162,14 @@ function initializeAppUI() {
     BRAND_TILES_CONFIG.forEach(config => {
         const blockTile = document.createElement('button');
         blockTile.className = `color-tile ${config.tileClass}`;
-        blockTile.innerHTML = `<span style="font-size:0.65rem; opacity:0.6;">Title ${config.id.split('_')[1]}</span><span>${config.name}</span>`;
+        
+        // Dynamically scales text down slightly if name exceeds 16 characters
+        const scaleModifier = config.name.length > 16 ? 'font-size: 1.05rem;' : '';
+        
+        blockTile.innerHTML = `
+            <span style="font-size:0.65rem; opacity:0.6;">Title ${config.id.split('_')[1]}</span>
+            <span style="${scaleModifier}">${config.name}</span>
+        `;
         blockTile.onclick = () => launchSectionView(config);
         elements.tilesGrid.appendChild(blockTile);
     });
