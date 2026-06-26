@@ -61,7 +61,6 @@
     { "id": "redeemer_tit_2_14", "label": "Redeem us from all iniquity", "reference": "Titus 2:14" },
     { "id": "redeemer_heb_9_12", "label": "Obtained eternal redemption", "reference": "Hebrews 9:12" },
     { "id": "redeemer_heb_9_28", "label": "Once offered to bear sins", "reference": "Hebrews 9:28" },
-    { "id": "redeemer_1pet_1_18", "label": "Not redeemed with corruptible things", "reference": "1 Paragraphs 1:18" },
     { "id": "redeemer_1pet_2_24", "label": "Bare our sins in his own body", "reference": "1 Peter 2:24" },
     { "id": "redeemer_1pet_3_18", "label": "Suffered once for sins", "reference": "1 Peter 3:18" },
     { "id": "redeemer_1jn_2_2", "label": "Propitiation for our sins", "reference": "1 John 2:2" },
@@ -252,11 +251,48 @@
     { "id": "only_mos_6_59", "label": "Cleansed by blood", "reference": "Moses 6:59" },
     { "id": "only_mos_7_62", "label": "Bear testimony of mine Only Begotten", "reference": "Moses 7:62" }
   ],
-  "beloved_son": [],
-  "holy_one_of_israel": [],
-  "wonderful": [],
-  "counsellor": [],
-  "mighty_god": [],
+  "beloved_son": [
+    { "id": "beloved_matt_3_17", "label": "This is my beloved Son", "reference": "Matthew 3:17" },
+    { "id": "beloved_matt_12_18", "label": "My beloved, in whom my soul is pleased", "reference": "Matthew 12:18" },
+    { "id": "beloved_3ne_11_7", "label": "Behold my Beloved Son", "reference": "3 Nephi 11:7" },
+    { "id": "beloved_jsh_1_17", "label": "This is My Beloved Son. Hear Him", "reference": "Joseph Smith—History 1:17" }
+  ],
+  "holy_one_of_israel": [
+    { "id": "holy_one_2kgs_19_22", "label": "The Holy One of Israel", "reference": "2 Kings 19:22" },
+    { "id": "holy_one_ps_71_22", "label": "O thou Holy One of Israel", "reference": "Psalms 71:22" },
+    { "id": "holy_one_ps_78_41", "label": "Limited the Holy One of Israel", "reference": "Psalms 78:41" },
+    { "id": "holy_one_ps_89_18", "label": "Our king is the Holy One of Israel", "reference": "Psalms 89:18" },
+    { "id": "holy_one_isa_1_4", "label": "Provoked the Holy One of Israel", "reference": "Isaiah 1:4" },
+    { "id": "holy_one_isa_5_19", "label": "Counsel of the Holy One of Israel", "reference": "Isaiah 5:19" },
+    { "id": "holy_one_isa_12_6", "label": "Great is the Holy One of Israel", "reference": "Isaiah 12:6" },
+    { "id": "holy_one_isa_30_11", "label": "Cause the Holy One of Israel to cease", "reference": "Isaiah 30:11" },
+    { "id": "holy_one_isa_41_14", "label": "Thy redeemer, the Holy One of Israel", "reference": "Isaiah 41:14" },
+    { "id": "holy_one_isa_48_17", "label": "Thy Redeemer, the Holy One of Israel", "reference": "Isaiah 48:17" },
+    { "id": "holy_one_isa_60_14", "label": "Zion of the Holy One of Israel", "reference": "Isaiah 60:14" },
+    { "id": "holy_one_jer_50_29", "label": "Against the Holy One of Israel", "reference": "Jeremiah 50:29" },
+    { "id": "holy_one_jer_51_5", "label": "Sin against the Holy One of Israel", "reference": "Jeremiah 51:5" },
+    { "id": "holy_one_ezek_39_7", "label": "Lord, the Holy One in Israel", "reference": "Ezekiel 39:7" },
+    { "id": "holy_one_2ne_25_29", "label": "Christ is the Holy One of Israel", "reference": "2 Nephi 25:29" }
+  ],
+  "wonderful": [
+    { "id": "wonderful_isa_9_6", "label": "His name shall be called Wonderful", "reference": "Isaiah 9:6" },
+    { "id": "wonderful_matt_7_22", "label": "Done many wonderful works", "reference": "Matthew 7:22" },
+    { "id": "wonderful_dc_65_4", "label": "Make known his wonderful works", "reference": "Doctrine and Covenants 65:4" },
+    { "id": "wonderful_dc_84_66", "label": "They shall do many wonderful works", "reference": "Doctrine and Covenants 84:66" }
+  ],
+  "counsellor": [
+    { "id": "counsellor_isa_9_6", "label": "Wonderful, Counsellor", "reference": "Isaiah 9:6" }
+  ],
+  "mighty_god": [
+    { "id": "mighty_god_ps_132_2", "label": "Vowed unto the mighty God of Jacob", "reference": "Psalms 132:2" },
+    { "id": "mighty_god_isa_1_24", "label": "The mighty One of Israel", "reference": "Isaiah 1:24" },
+    { "id": "mighty_god_isa_9_6", "label": "The mighty God", "reference": "Isaiah 9:6" },
+    { "id": "mighty_god_isa_30_29", "label": "To the mighty One of Israel", "reference": "Isaiah 30:29" },
+    { "id": "mighty_god_1ne_21_26", "label": "Thy Savior and the Mighty One of Jacob", "reference": "1 Nephi 21:26" },
+    { "id": "mighty_god_1ne_22_12", "label": "Their Savior and the Mighty One of Israel", "reference": "1 Nephi 22:12" },
+    { "id": "mighty_god_2ne_31_19", "label": "Merits of him who is mighty to save", "reference": "2 Nephi 31:19" },
+    { "id": "mighty_god_dc_85_7", "label": "Will send one mighty and strong", "reference": "Doctrine and Covenants 85:7" }
+  ],
   "everlasting_father": [],
   "prince_of_peace": [],
   "king_of_kings": [],
