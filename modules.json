@@ -93,7 +93,37 @@
     { "id": "redeemer_dc_138_3", "label": "Coming of the Redeemer", "reference": "Doctrine and Covenants 138:3" },
     { "id": "redeemer_dc_138_18", "label": "Declaring liberty to captives", "reference": "Doctrine and Covenants 138:18" }
   ],
-  "bom": [],
-  "dc": [],
+  "bom": [
+    { "id": "bread_john_6_35", "label": "I am the bread of life", "reference": "John 6:35" },
+    { "id": "bread_rev_2_17", "label": "Eat of the hidden manna", "reference": "Revelation 2:17" },
+    { "id": "bread_alma_5_34", "label": "Eat and drink of the bread of life", "reference": "Alma 5:34" }
+  ],
+  "dc": [
+    { "id": "lord_matt_28_6", "label": "See the place where the Lord lay", "reference": "Matthew 28:6" },
+    { "id": "lord_mark_16_19", "label": "He was received up into heaven", "reference": "Mark 16:19" },
+    { "id": "lord_luke_2_11", "label": "A Saviour, which is Christ the Lord", "reference": "Luke 2:11" },
+    { "id": "lord_luke_22_61", "label": "Lord turned, and looked upon Peter", "reference": "Luke 22:61" },
+    { "id": "lord_john_11_2", "label": "Mary which anointed the Lord", "reference": "John 11:2" },
+    { "id": "lord_john_20_2", "label": "Taken away the Lord out of sepulchre", "reference": "John 20:2" },
+    { "id": "lord_acts_2_36", "label": "Both Lord and Christ", "reference": "Acts 2:36" },
+    { "id": "lord_1cor_8_6", "label": "One Lord Jesus Christ", "reference": "1 Corinthians 8:6" },
+    { "id": "lord_1cor_12_3", "label": "Say that Jesus is the Lord", "reference": "1 Corinthians 12:3" },
+    { "id": "lord_2tim_4_22", "label": "Lord Jesus Christ be with thy spirit", "reference": "2 Timothy 4:22" },
+    { "id": "lord_james_2_1", "label": "The Lord of glory", "reference": "James 2:1" },
+    { "id": "lord_rev_17_14", "label": "He is Lord of lords", "reference": "Revelation 17:14" },
+    { "id": "lord_rev_22_21", "label": "Grace of our Lord Jesus Christ", "reference": "Revelation 22:21" },
+    { "id": "lord_2ne_28_5", "label": "Redeemer hath done his work", "reference": "2 Nephi 28:5" },
+    { "id": "lord_mosiah_3_12", "label": "Faith on the Lord Jesus Christ", "reference": "Mosiah 3:12" },
+    { "id": "lord_mosiah_3_17", "label": "Christ, the Lord Omnipotent", "reference": "Mosiah 3:17" },
+    { "id": "lord_3ne_1_12", "label": "Voice of the Lord came unto him", "reference": "3 Nephi 1:12" },
+    { "id": "lord_3ne_11_13", "label": "Lord spake unto them", "reference": "3 Nephi 11:13" },
+    { "id": "lord_ether_3_6", "label": "Lord stretched forth his hand", "reference": "Ether 3:6" },
+    { "id": "lord_dc_10_70", "label": "Your Redeemer, Lord, and God", "reference": "Doctrine and Covenants 10:70" },
+    { "id": "lord_dc_17_9", "label": "Jesus Christ, your Lord and God", "reference": "Doctrine and Covenants 17:9" },
+    { "id": "lord_dc_35_1", "label": "Listen to the voice of the Lord", "reference": "Doctrine and Covenants 35:1" },
+    { "id": "lord_dc_95_17", "label": "Even Jesus Christ your Lord", "reference": "Doctrine and Covenants 95:17" },
+    { "id": "lord_dc_110_2", "label": "Saw the Lord standing", "reference": "Doctrine and Covenants 110:2" },
+    { "id": "lord_dc_138_60", "label": "Our Lord and Savior Jesus Christ", "reference": "Doctrine and Covenants 138:60" }
+  ],
   "pgp": []
 }
