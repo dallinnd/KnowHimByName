@@ -1,4 +1,4 @@
-// --- 50 Names of Christ Loop Matrix ---
+// --- Complete 50 Names of Christ Configuration Matrix ---
 const CHRIST_NAMES_DATA = [
     "Savior", "Redeemer", "Bread of Life", "Lord", "Creator", 
     "Son of the Living God", "Only Begotten Son", "Beloved Son", "Holy One of Israel", "Wonderful", 
@@ -13,19 +13,21 @@ const CHRIST_NAMES_DATA = [
 ];
 
 const BASE_SEQUENCE_STYLES = [
-    { id: 'ot', colorClass: 'tile-ot', bgClass: 'bg-ot' },
-    { id: 'nt', colorClass: 'tile-nt', bgClass: 'bg-nt' },
-    { id: 'bom', colorClass: 'tile-bom', bgClass: 'bg-bom' },
-    { id: 'dc', colorClass: 'tile-dc', bgClass: 'bg-dc' },
-    { id: 'pgp', colorClass: 'tile-pgp', bgClass: 'bg-pgp' }
+    { colorClass: 'tile-ot', bgClass: 'bg-ot' },
+    { colorClass: 'tile-nt', bgClass: 'bg-nt' },
+    { colorClass: 'tile-bom', bgClass: 'bg-bom' },
+    { colorClass: 'tile-dc', bgClass: 'bg-dc' },
+    { colorClass: 'tile-pgp', bgClass: 'bg-pgp' }
 ];
 
+// Creates clean backend keys like "bread_of_life" or "way_truth_and_life"
 const BRAND_TILES_CONFIG = CHRIST_NAMES_DATA.map((name, idx) => {
     const layout = BASE_SEQUENCE_STYLES[idx % BASE_SEQUENCE_STYLES.length];
+    const cleanKey = name.toLowerCase().replace(/,\s*/g, '_').replace(/\s+/g, '_');
     return {
         id: `name_${idx + 1}`,
         name: name,
-        sectionMapId: layout.id,
+        sectionMapId: cleanKey, // Explicit unique key matching modules.json
         tileClass: layout.colorClass,
         bgClass: layout.bgClass
     };
@@ -78,8 +80,8 @@ async function loadApplicationData() {
 
         initializeAppUI();
     } catch (e) {
-        console.error("Critical boot validation check skipped.", e);
-        elements.tilesGrid.innerHTML = `<p style='grid-column: span 2; padding:20px; color:red;'>Initialization Error. Ensure standard_works.txt and modules.json exist.</p>`;
+        console.error("Initialization check skipped.", e);
+        elements.tilesGrid.innerHTML = `<p style='grid-column: span 2; padding:20px; color:red;'>Initialization Error. Check data assets.</p>`;
     }
 }
 
@@ -162,14 +164,7 @@ function initializeAppUI() {
     BRAND_TILES_CONFIG.forEach(config => {
         const blockTile = document.createElement('button');
         blockTile.className = `color-tile ${config.tileClass}`;
-        
-        // Dynamically scales text down slightly if name exceeds 16 characters
-        const scaleModifier = config.name.length > 16 ? 'font-size: 1.05rem;' : '';
-        
-        blockTile.innerHTML = `
-            <span style="font-size:0.65rem; opacity:0.6;">Title ${config.id.split('_')[1]}</span>
-            <span style="${scaleModifier}">${config.name}</span>
-        `;
+        blockTile.innerHTML = `<span>Title ${config.id.split('_')[1]}</span><span>${config.name}</span>`;
         blockTile.onclick = () => launchSectionView(config);
         elements.tilesGrid.appendChild(blockTile);
     });
@@ -178,6 +173,7 @@ function initializeAppUI() {
 function launchSectionView(config) {
     elements.appTitle.textContent = config.name;
     elements.bannerTitle.textContent = config.name;
+    // Direct point-to-point module mapping lookup matching explicit names of Christ
     renderSectionModulesList(config.sectionMapId);
     navigateToView('modules-view', config.bgClass);
 }
@@ -187,7 +183,7 @@ function renderSectionModulesList(sectionId) {
     const items = modulesData[sectionId] || [];
 
     if (items.length === 0) {
-        elements.modulesContainer.innerHTML = `<div class="glass-module-card text-center">No modules compiled for this section profile.</div>`;
+        elements.modulesContainer.innerHTML = `<div class="glass-module-card text-center">No curated modules assigned to this title yet.</div>`;
         return;
     }
 
