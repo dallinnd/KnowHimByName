@@ -1,24 +1,47 @@
 {
-  "bom": [
-    {
-      "id": "bom_m1",
-      "label": "Nephi's Curation Account",
-      "reference": "1 Nephi 1:1-3"
-    },
-    {
-      "id": "bom_m2",
-      "label": "Lehi's Visionary Pillar",
-      "reference": "1 Nephi 1:5-6"
-    }
-  ],
   "ot": [
-    {
-      "id": "ot_m1",
-      "label": "The Foundation Era",
-      "reference": "Genesis 1:1-5"
-    }
+    { "id": "savior_ex_15_2", "label": "Lord is my salvation", "reference": "Exodus 15:2" },
+    { "id": "savior_2sam_22_2", "label": "My fortress, and my deliverer", "reference": "2 Samuel 22:2" },
+    { "id": "savior_ps_27_1", "label": "Lord is my light and my salvation", "reference": "Psalms 27:1" },
+    { "id": "savior_ps_40_17", "label": "Thou art my help and my deliverer", "reference": "Psalms 40:17" },
+    { "id": "savior_ps_106_21", "label": "They forgat God their saviour", "reference": "Psalms 106:21" },
+    { "id": "savior_ps_144_2", "label": "My deliverer; my shield", "reference": "Psalms 144:2" },
+    { "id": "savior_isa_19_20", "label": "He shall send them a saviour", "reference": "Isaiah 19:20" },
+    { "id": "savior_isa_43_3", "label": "The Holy One of Israel, thy Saviour", "reference": "Isaiah 43:3" },
+    { "id": "savior_isa_43_11", "label": "Beside me there is no saviour", "reference": "Isaiah 43:11" },
+    { "id": "savior_isa_45_15", "label": "God of Israel, the Saviour", "reference": "Isaiah 45:15" },
+    { "id": "savior_joel_2_32", "label": "Whosoever shall call on the Lord", "reference": "Joel 2:32" },
+    { "id": "savior_matt_1_21", "label": "He shall save his people from sins", "reference": "Matthew 1:21" },
+    { "id": "savior_luke_1_47", "label": "My spirit hath rejoiced in God", "reference": "Luke 1:47" },
+    { "id": "savior_luke_2_11", "label": "Born in the city of David a Saviour", "reference": "Luke 2:11" },
+    { "id": "savior_john_3_17", "label": "World through him might be saved", "reference": "John 3:17" },
+    { "id": "savior_john_4_42", "label": "This is indeed the Christ", "reference": "John 4:42" },
+    { "id": "savior_acts_2_21", "label": "Whosoever shall call shall be saved", "reference": "Acts 2:21" },
+    { "id": "savior_acts_4_12", "label": "None other name whereby we must be saved", "reference": "Acts 4:12" },
+    { "id": "savior_acts_5_31", "label": "Exalted to be a Prince and a Saviour", "reference": "Acts 5:31" },
+    { "id": "savior_acts_7_35", "label": "Send to be a ruler and a deliverer", "reference": "Acts 7:35" },
+    { "id": "savior_acts_13_23", "label": "Raised unto Israel a Saviour, Jesus", "reference": "Acts 13:23" },
+    { "id": "savior_acts_13_47", "label": "Salvation unto the ends of the earth", "reference": "Acts 13:47" },
+    { "id": "savior_rom_11_26", "label": "Shall come out of Sion the Deliverer", "reference": "Romans 11:26" },
+    { "id": "savior_phil_3_20", "label": "We look for the Saviour", "reference": "Philippians 3:20" },
+    { "id": "savior_1tim_4_10", "label": "We trust in the living God", "reference": "1 Timothy 4:10" },
+    { "id": "savior_tit_2_13", "label": "Glorious appearing of our Saviour", "reference": "Titus 2:13" },
+    { "id": "savior_1jn_2_2", "label": "He is the propitiation for our sins", "reference": "1 John 2:2" },
+    { "id": "savior_1jn_4_14", "label": "Sent the Son to be the Saviour", "reference": "1 John 4:14" },
+    { "id": "savior_1ne_13_40", "label": "Lamb of God is the Son", "reference": "1 Nephi 13:40" },
+    { "id": "savior_1ne_21_26", "label": "I, the Lord, am thy Savior", "reference": "1 Nephi 21:26" },
+    { "id": "savior_2ne_6_17", "label": "Mighty God shall deliver his people", "reference": "2 Nephi 6:17" },
+    { "id": "savior_2ne_31_13", "label": "Following your Lord and your Savior", "reference": "2 Nephi 31:13" },
+    { "id": "savior_mosiah_3_20", "label": "Knowledge of a Savior shall spread", "reference": "Mosiah 3:20" },
+    { "id": "savior_hel_14_15", "label": "Must die that salvation may come", "reference": "Helaman 14:15" },
+    { "id": "savior_morm_3_14", "label": "Forbidden them by our Lord", "reference": "Mormon 3:14" },
+    { "id": "savior_dc_3_16", "label": "Knowledge of a Savior come", "reference": "Doctrine and Covenants 3:16" },
+    { "id": "savior_dc_43_34", "label": "I am Jesus Christ, the Savior", "reference": "Doctrine and Covenants 43:34" },
+    { "id": "savior_mos_1_6", "label": "Mine Only Begotten is the Savior", "reference": "Moses 1:6" },
+    { "id": "savior_mos_5_15", "label": "Believed in the Son should be saved", "reference": "Moses 5:15" }
   ],
   "nt": [],
+  "bom": [],
   "dc": [],
   "pgp": []
 }
